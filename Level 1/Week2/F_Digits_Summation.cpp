@@ -8,6 +8,8 @@ using namespace std;
 #define ff first
 #define ss second
 
+// https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/F
+
 void solve(){
     ll n, m;
     cin >> n >> m;

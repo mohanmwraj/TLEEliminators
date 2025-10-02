@@ -8,6 +8,9 @@ using namespace std;
 #define ff first
 #define ss second
 
+
+// https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/L
+
 void solve(){
     string fnfp, fnsp;
     string snfp, snsp;
