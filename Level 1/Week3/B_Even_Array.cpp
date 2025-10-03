@@ -2,7 +2,6 @@
 // pbm : https://codeforces.com/problemset/problem/1367/B
 //**********************************************************************************
 #include<bits/stdc++.h>
-
 #include<iostream>
 using ll = long long;
 using ld = long double;
