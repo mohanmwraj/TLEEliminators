@@ -11,8 +11,8 @@ using namespace std;
 #define ss second
 
 void solve(){
-    int a, b, c;
-    ll d;
+    ll a, b, c, d;
+    //ll d;
     cin >> a >> b >> c >> d;
 
     string output = "NO";
@@ -35,3 +35,16 @@ int main() {
     }
     return 0;
 }
+
+/*
+Test Case 7: Overflow if we use int
+Input
+-432300451 509430974 -600857890 -220227239212711384
+Output
+NO
+Answer
+YES
+Checker Log
+wrong answer 1st lines differ - expected: 'YES', found: 'NO'
+
+*/
