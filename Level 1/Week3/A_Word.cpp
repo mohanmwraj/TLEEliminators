@@ -12,12 +12,36 @@ using namespace std;
 #define ss second
 
 void solve(){
-    
+    string s; cin >> s;
+
+    int lowercase = 0, uppercase = 0;
+    for(int i = 0; i < s.size(); ++i){
+        if('a' <= s[i] && s[i] <= 'z'){
+            lowercase++;
+        } else {
+            uppercase++;
+        }
+    }
+
+    if(lowercase >= uppercase){
+        for(int i = 0; i < s.size(); ++i){
+            s[i] = tolower(s[i]);
+        }
+
+        cout << s << endl;
+    } else {
+        for(int i = 0; i < s.size(); ++i){
+            s[i] = toupper(s[i]);
+        }
+
+        cout << s << endl;
+
+    }
 }
 
 int main() {
     int T = 1;
-    cin >> T;
+    //cin >> T;
     while(T--){
         solve();
     }
