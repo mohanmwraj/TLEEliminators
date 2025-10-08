@@ -12,12 +12,21 @@ using namespace std;
 #define ss second
 
 void solve(){
-    
+    int n; cin >> n;
+
+    int val1 = n % 5;
+    int val2 = 5 - (n%5);
+
+    if(val1 < val2){
+        cout << n - val1 << endl;
+    } else {
+        cout << n + val2 << endl;
+    }
 }
 
 int main() {
     int T = 1;
-    cin >> T;
+    //cin >> T;
     while(T--){
         solve();
     }
