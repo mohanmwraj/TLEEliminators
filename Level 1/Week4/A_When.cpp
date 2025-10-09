@@ -12,12 +12,25 @@ using namespace std;
 #define ss second
 
 void solve(){
-    
+    int T; cin >> T;
+
+    int hour = 21;
+    if(T >= 60){
+        hour = 22;
+        T -= 60;
+    }
+
+    cout << hour << ":" ;//<< T << endl;
+    if(T < 10){
+        cout << 0 << T << endl;
+    } else {
+        cout << T << endl;
+    }
 }
 
 int main() {
     int T = 1;
-    cin >> T;
+   // cin >> T;
     while(T--){
         solve();
     }
