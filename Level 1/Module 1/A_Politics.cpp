@@ -1,5 +1,5 @@
 //**********************************************************************************
-// pbm : https://codeforces.com/problemset/problem/266/B
+// pbm : https://codeforces.com/problemset/problem/1818/A
 //**********************************************************************************
 #include<bits/stdc++.h>
 
@@ -12,24 +12,12 @@ using namespace std;
 #define ss second
 
 void solve(){
-    int n, t; cin >> n >> t;
-    string s; cin >> s;
-
-    for(int i = 0; i < t; ++i){
-        for(int j = 0; j < n - 1; ++j){
-            if(s[j] == 'B' && s[j + 1] == 'G'){
-                swap(s[j], s[j + 1]);
-                j++;
-            }
-        }
-    }
-
-    cout << s << endl;
+    
 }
 
 int main() {
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--){
         solve();
     }

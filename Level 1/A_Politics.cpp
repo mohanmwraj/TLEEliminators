@@ -1,5 +1,5 @@
 //**********************************************************************************
-// pbm : https://www.hackerearth.com/problem/algorithm/pattern/
+// pbm : 
 //**********************************************************************************
 #include<bits/stdc++.h>
 
@@ -12,26 +12,22 @@ using namespace std;
 #define ss second
 
 void solve(){
-    int n; cin >> n;
+    int n, k; cin >> n >> k;
 
-    for(int i = 0; i < n; ++i) cout<<'*';
-    cout<<endl;
+    vector<string> v(n);
+    for(int i = 0; i < n; ++i) cin >> v[i];
 
-    for(int i = 0; i < n - 2; ++i){
-        int noSpaces = (n - 2) - i;
-        for(int j = 0; j < noSpaces; ++j)
-            cout << " ";
-        
-        cout << '*' << endl;
+    int ans = 1;
+    for(int i = 1; i < n; ++i){
+        ans += v[0] == v[i];
     }
 
-    for(int i = 0; i < n; ++i) cout<<'*';
-    cout<<endl;
+    cout << ans << endl;
 }
 
 int main() {
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--){
         solve();
     }
