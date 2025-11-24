@@ -1,14 +1,8 @@
-.DS_Store
-.cph/
-.vscode/
-*.bin
-
-*.dSYM/
-
 #Unix executables
 floyds_triangle
 right_half_pyramid
 left_half_pyramid
 inverted_right_half
+Hollow_Square
 hourglass
 full_pyramid

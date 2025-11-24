@@ -12,22 +12,28 @@ using namespace std;
 #define ss second
 
 void solve(){
-    int n, k; cin >> n >> k;
-
-    vector<string> v(n);
-    for(int i = 0; i < n; ++i) cin >> v[i];
-
-    int ans = 1;
-    for(int i = 1; i < n; ++i){
-        ans += v[0] == v[i];
+    int rows = 5;
+    for(int i = 0; i < rows; ++i){
+        for(int j = 0; j <= rows - i - 1; ++j){
+            cout << "*";
+        }
+        cout << endl;
     }
-
-    cout << ans << endl;
 }
+
+/*
+output:
+*****
+****
+***
+**
+*
+
+*/
 
 int main() {
     int T = 1;
-    cin >> T;
+    //cin >> T;
     while(T--){
         solve();
     }
