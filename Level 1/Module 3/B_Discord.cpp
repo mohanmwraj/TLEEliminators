@@ -14,20 +14,13 @@ using namespace std;
 void solve(){
    int n, m; cin >> n >> m;
 
-   int arr[n][m];
-   for(int i = 0; i < n; ++i){
-    for(int j = 0; j < m; ++j){
+   int arr[m][n];
+   for(int i = 0; i < m; ++i){
+    for(int j = 0; j < n; ++j){
         cin >> arr[i][j];
         arr[i][j]--;
      }
    }
-
-//    for(int i = 0; i < n; ++i){
-//     for(int j = 0; j < m; ++j){
-//         cout << arr[i][j];
-//         //arr[i][j]--;
-//      }
-//    }
 
    int count = 0;
    for(int i = 0; i < n; ++i){
@@ -52,11 +45,6 @@ void solve(){
 
         for(int l = 0; l < n; ++l){
             if(v[l] == 0) count++;
-            //cout << v[l];
-            // 1100
-            // 1110
-            // 0111
-            // 0011
         }
    }
 
