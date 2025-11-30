@@ -1,5 +1,5 @@
 //**********************************************************************************
-// pbm : https://codeforces.com/problemset/problem/1269/A
+// pbm : https://codeforces.com/problemset/problem/1614/B
 //**********************************************************************************
 #include<bits/stdc++.h>
 
@@ -12,13 +12,12 @@ using namespace std;
 #define ss second
 
 void solve(){
-    int n; cin >> n;
     
 }
 
 int main() {
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--){
         solve();
     }
