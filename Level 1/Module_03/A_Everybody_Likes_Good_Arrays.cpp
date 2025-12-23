@@ -30,7 +30,7 @@ void solve(){
         }
     }
 
-    totalOps += k - 1;
+    totalOps += k - 1; // in the array we need to add the same parity to the total operations.
     cout << totalOps << endl;
 }
 
