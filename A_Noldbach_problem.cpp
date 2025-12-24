@@ -25,7 +25,7 @@ void solve(){
                 }
             }
         }
-
+        // If the number have only two divisors then it is prime. We are pushing into prime vector.
         if(count == 2){
             primes.push_back(i);
         }
