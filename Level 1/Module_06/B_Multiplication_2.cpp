@@ -11,23 +11,43 @@ using namespace std;
 #define ff first
 #define ss second
 
+/*
+
+
 // 1_000_000_000_000_000_001
+
+    Int = -2*10^9 to 2*10^9
+    ll = -9*10^18 to 9*10^18
+
+*/
 
 void solve(){
     int n; cin >> n;
-    ll result = 1;
+
+    ll ub = (ll)1e18;
+    ll arr[n];
     for(int i = 0; i < n; ++i){
-        ll temp; cin >> temp;
-        result *= temp;
-    }
+        cin >> arr[i];}
 
-    if(result > 1e18) {
-        cout << -1 << endl;
-    } else {
-        cout << result << endl;
+    for(int i = 0; i < n; ++i){
+        if(arr[i] == 0){
+            cout << 0 << endl;
+            return;
+        }
     }
+    
+    ll prod = 1;
+    for(int i = 0; i < n; ++i){
+        //prod = prod * arr[i];
+        if(prod > ub / arr[i]){
+            cout << -1 << endl;
+            return;
+        } else {
+            prod = prod * arr[i];
+        }
+    }
+    cout << prod << endl;
 }
-
 int main() {
     int T = 1;
     //cin >> T;
