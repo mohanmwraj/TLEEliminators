@@ -34,12 +34,12 @@ void solve(){
 
     // cout << count << endl;
 
-    map<int, int> map;
+    map<int, int> freq;
     for(auto it: arr){
-        map[it]++;
+        freq[it]++;
     }
 
-    if(map.size() == 1){
+    if(freq.size() == 1){
         cout << -1 << endl;
         return;
     }
