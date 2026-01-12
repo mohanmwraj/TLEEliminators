@@ -4,6 +4,7 @@
 #include "bits/stdc++.h"
 
 #include<iostream>
+#include <map>
 using ll = long long;
 using ld = long double;
 using namespace std;
@@ -23,6 +24,16 @@ void solve(){
     for(int i = 0; i < n; i++){
         freq[a[i]]++;
     }
+
+    int keep = 0;
+    for(auto it : freq){
+        if(it.second >= it.first){ // freq of the number >= the number itself
+            keep += it.first;
+        }
+    }
+
+    int remove = n - keep; // total elements - elements to keep
+    cout << remove << endl;
 }
 
 int main() {
