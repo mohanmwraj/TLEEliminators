@@ -39,7 +39,7 @@ Approach:
 void solve(){
     int n; cin >> n;
 
-    set<int> st;
+    set<int> st; // performing all operations is same as counting unique even numbers we encounter
     for(int i = 0; i < n; i++){
         int x; cin >> x;
 
