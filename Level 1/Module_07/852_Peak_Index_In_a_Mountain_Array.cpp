@@ -59,7 +59,7 @@ void solve(int arr[]){
             r = mid;
         }
     }
-    return l;
+    cout << l;
 }
 
 int main() {
