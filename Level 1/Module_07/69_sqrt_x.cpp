@@ -32,6 +32,14 @@ void solve(int x){
     Binary Search: For x >= 2 the square root is always smaller than x/2 and larger than 0: 0 < a < x/2
     So we can apply binary search in this range to find the largest number whose square is <= x
 
+    s = sqrt(x)
+    s*s <= x
+
+    0 1 2 3 4 5 6 ... x/2
+    T T T T T T F F F ... F
+
+    > need to find the last T in the array, condition is mid*mid <= x
+
 */
 
 int sqrtBS(int x){
