@@ -311,6 +311,219 @@ int pos = (int)log2(n) + 1;
 
 ---
 
+## STL `bitset<N>` - Fixed-Size Bit Container
+
+### Declaration & Initialization
+```cpp
+#include <bitset>
+
+bitset<32> b1;              // 32 bits, all initialized to 0
+bitset<8> b2(42);           // From integer: 00101010
+bitset<8> b3("11001010");   // From string (left to right = MSB to LSB)
+bitset<8> b4(0b11001010);   // From binary literal (C++14)
+
+// ⚠️ Size must be a compile-time constant!
+// bitset<n> is INVALID if n is a variable
+```
+
+### Basic Operations
+```cpp
+bitset<8> b(42);  // 00101010
+
+// Access
+b[0];            // Get bit at position 0 (rightmost) → 0
+b[1];            // Get bit at position 1 → 1
+b.test(3);       // Same as b[3], but throws if out of range
+
+// Modify
+b.set();         // Set all bits to 1 → 11111111
+b.set(3);        // Set bit 3 to 1
+b.set(3, 0);     // Set bit 3 to 0
+b.reset();       // Set all bits to 0 → 00000000
+b.reset(3);      // Set bit 3 to 0
+b.flip();        // Flip all bits
+b.flip(3);       // Flip bit 3
+
+// Query
+b.count();       // Number of set bits (popcount)
+b.size();        // Total number of bits (32 here)
+b.any();         // True if any bit is set
+b.none();        // True if no bit is set
+b.all();         // True if all bits are set (C++11)
+```
+
+### Conversion
+```cpp
+bitset<8> b("11001010");
+
+b.to_ulong();    // Convert to unsigned long → 202
+b.to_ullong();   // Convert to unsigned long long (C++11)
+b.to_string();   // Convert to string → "11001010"
+
+// ⚠️ Throws overflow_error if value doesn't fit in ulong/ullong
+```
+
+### Bitwise Operations
+```cpp
+bitset<8> a(0b11001010);
+bitset<8> b(0b10101100);
+
+a & b;           // AND → 10001000
+a | b;           // OR  → 11101110
+a ^ b;           // XOR → 01100110
+~a;              // NOT → 00110101
+
+a &= b;          // Compound assignment versions
+a |= b;
+a ^= b;
+
+a << 2;          // Left shift → 00101000
+a >> 2;          // Right shift → 00110010
+a <<= 2;         // Shift and assign
+a >>= 2;
+```
+
+### ⭐ Finding Set Bits Efficiently
+```cpp
+bitset<64> b(0b1010100);
+
+// Find first set bit (from position 0)
+int firstSet = b._Find_first();  // Returns 2 (GCC extension)
+// Returns b.size() if no bit is set
+
+// Find next set bit after position pos
+int nextSet = b._Find_next(2);   // Returns 4 (GCC extension)
+// Returns b.size() if no more bits
+
+// Iterate through all set bits
+for (int i = b._Find_first(); i < b.size(); i = b._Find_next(i)) {
+    cout << i << " ";  // Outputs: 2 4 6
+}
+```
+
+### I/O Operations
+```cpp
+bitset<8> b;
+cin >> b;         // Input binary string directly
+cout << b;        // Output as binary string
+
+// Example: Input "10101" → b = 00010101
+```
+
+---
+
+## Comparison: `bitset<N>` vs `vector<bool>` vs `bool arr[N]`
+
+| Feature | `bitset<N>` | `vector<bool>` | `bool arr[N]` |
+|---------|-------------|----------------|---------------|
+| **Size** | Compile-time constant | Runtime (dynamic) | Compile-time (VLA in C99) |
+| **Memory** | N bits (~N/8 bytes) | ~N bits (packed) | N bytes |
+| **Cache** | Very efficient | Efficient | Less efficient |
+| **Bitwise ops** | ✅ Native (`&`, `\|`, `^`) | ❌ Manual loop | ❌ Manual loop |
+| **`count()`** | ✅ O(N/64) optimized | ❌ O(N) loop | ❌ O(N) loop |
+| **Random access** | O(1) | O(1) | O(1) |
+| **Set/Reset all** | O(N/64) | O(N) | O(N) |
+| **STL compatible** | Partially | Yes | No |
+
+### Memory Comparison
+```cpp
+// For N = 10^6 bits:
+bitset<1000000> b;      // ~125 KB (N/8 bytes)
+vector<bool> v(1e6);    // ~125 KB (packed, but varies)
+bool arr[1000000];      // ~1 MB (1 byte per bool)
+
+// bitset and vector<bool> use 8x less memory!
+```
+
+### Performance Comparison
+```cpp
+// Counting set bits in 10^6 elements:
+
+// bitset - FASTEST (uses popcount on 64-bit chunks)
+bitset<1000000> b;
+int cnt = b.count();  // ~15,625 operations (N/64)
+
+// vector<bool> - SLOW
+vector<bool> v(1e6);
+int cnt = count(v.begin(), v.end(), true);  // 10^6 operations
+
+// bool array - SLOW
+bool arr[1000000];
+int cnt = 0;
+for (int i = 0; i < 1e6; i++) cnt += arr[i];  // 10^6 operations
+```
+
+### Bitwise Operations Speed
+```cpp
+// XOR two arrays of 10^6 bits:
+
+// bitset - FASTEST (operates on 64-bit words)
+bitset<1000000> a, b;
+a ^= b;  // ~15,625 XOR operations
+
+// vector<bool> - SLOW
+vector<bool> va(1e6), vb(1e6);
+for (int i = 0; i < 1e6; i++) va[i] = va[i] ^ vb[i];  // 10^6 ops
+
+// bool array - SLOW (same as vector<bool>)
+```
+
+### When to Use Each?
+
+| Use Case | Best Choice |
+|----------|-------------|
+| Fixed size known at compile time | `bitset<N>` |
+| Size determined at runtime | `vector<bool>` or manual `vector<uint64_t>` |
+| Need fast bitwise operations | `bitset<N>` |
+| Need fast `count()` | `bitset<N>` |
+| Simple flag array, no bit ops needed | `vector<bool>` |
+| Need pointer to elements | `bool arr[N]` (vector<bool> has proxy issues) |
+| Interop with C APIs | `bool arr[N]` |
+| N > 10^7 and dynamic | Manual `vector<uint64_t>` with bit ops |
+
+### ⚠️ `vector<bool>` Pitfalls
+```cpp
+vector<bool> v(10);
+
+// ❌ FAILS - doesn't return actual bool reference
+bool* ptr = &v[0];  // Compilation error!
+
+// ❌ FAILS - auto deduces proxy type
+auto bit = v[0];    // bit is vector<bool>::reference, not bool!
+
+// ✅ CORRECT
+bool bit = v[0];    // Explicit bool conversion
+```
+
+### Custom Bitset for Runtime Size
+```cpp
+// When you need runtime-sized bitset with fast operations:
+class DynamicBitset {
+    vector<uint64_t> data;
+    int n;
+public:
+    DynamicBitset(int size) : n(size), data((size + 63) / 64, 0) {}
+    
+    void set(int i) { data[i / 64] |= (1ULL << (i % 64)); }
+    void reset(int i) { data[i / 64] &= ~(1ULL << (i % 64)); }
+    bool test(int i) { return data[i / 64] & (1ULL << (i % 64)); }
+    
+    int count() {
+        int cnt = 0;
+        for (auto x : data) cnt += __builtin_popcountll(x);
+        return cnt;
+    }
+    
+    DynamicBitset& operator^=(DynamicBitset& other) {
+        for (int i = 0; i < data.size(); i++)
+            data[i] ^= other.data[i];
+        return *this;
+    }
+};
+```
+
+---
+
 ## Subset Enumeration
 
 ### Iterate through all subsets of {0, 1, ..., n-1}
