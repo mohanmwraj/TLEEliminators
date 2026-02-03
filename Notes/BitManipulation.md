@@ -28,6 +28,15 @@ Decimal:  13 = 1×10¹ + 3×10⁰
 Binary:   13 = 1101₂ = 1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 8 + 4 + 0 + 1
 ```
 
+### Conversion of a decimal number to a different base number
+
+```
+(55)base 10 = (110111)base 2
+
+1 - at starting is the most significant bit (MSB)
+1 - at end is the least significant bit (LSB)
+```
+
 ### Bit Positions (0-indexed from right)
 ```
 Binary:  1 1 0 1
@@ -68,6 +77,62 @@ A | B | A&B | A|B | A^B
 1 | 0 |  0  |  1  |  1
 1 | 1 |  1  |  1  |  0
 ```
+```
+A ^ B ^ C
+
+A -> 1 0 1 0 1 1 0
+B -> 0 1 1 1 0 1 0
+C -> 1 1 1 1 1 1 1
+-------------------
+     0 0 1 0 0 1 1
+
+Parity of # of set bits 
+    odd -> 1
+    even -> 0
+
+```
+
+### Bitwise Left-Shift Operator
+
+A << B shift the A to the left by B bits, adding B zeros at the end.
+The result is same as A * 2^B
+
+```
+5 << 1 = 10 
+
+a << b = a * 2^b
+```
+
+### Bitwise Right-Shift Operator
+
+A >> B shift the A to the right by B bits, deleting B bits from the end.
+The result is same as A / 2^B
+
+```
+5 >> 1 = 2
+
+a << b = a / 2^b
+```
+
+### Properties of Bitwise Operators
+
+1. OR, AND, XOR are associative and commutative.
+2. A^0 = A
+3. A^A = 0
+4. If A^B = C, then A^C = B and B^C = A
+5. A & B <= MIN(A, B)
+6. A | B >= MAX(A, B)
+7. (A & 1) is 1 if A -> odd, else 0
+8. A & (A - 1) is 0 if A is power of 2
+
+**Associative** → The grouping of operations doesn't matter:
+- `A + (B + C) = (A + B) + C`
+- `A & (B & C) = (A & B) & C`
+
+**Commutative** → The order of operands doesn't matter:
+- `A + B = B + A`
+- `A & B = B & A`
+
 
 ### ⚠️ Operator Precedence (Common Pitfall!)
 ```cpp
@@ -313,6 +378,11 @@ int pos = (int)log2(n) + 1;
 
 ## STL `bitset<N>` - Fixed-Size Bit Container
 
+A bitset is an array of bools where each boolean values is not stored in a separate byte. Instead, bitset optimizes the space such that each boolean value takes 1-bit space only, so space taken by bitset is less than that of an array of bool or vector of bool.
+
+Note: A limitation of the bitset is that size must be known at compile time i.e. size of the bitset is fixed.
+
+
 ### Declaration & Initialization
 ```cpp
 #include <bitset>
@@ -409,6 +479,14 @@ cout << b;        // Output as binary string
 
 // Example: Input "10101" → b = 00010101
 ```
+
+---
+### Bit Masking
+
+Bitmasks a.k.a lightweight, is an integer stored in a computer's memory as a sequence/string of bits. Thus,
+we can use integers to represent a lightweight small set of boolean values.
+
+All set operations then involve only the bitwise manipulation of the corresponding integer, which makes it a much more efficient choice when compared with the C++ STL vector or set options.
 
 ---
 
@@ -944,10 +1022,12 @@ n ^ (1 << i)       // Toggle bit i
 (1 << n) - 1       // n bits all set to 1
 
 // ============= BUILT-IN FUNCTIONS =============
-__builtin_popcount(n)     // Count set bits
-__builtin_ctz(n)          // Trailing zeros (rightmost set bit position)
-__builtin_clz(n)          // Leading zeros
+__builtin_popcount(n) or __builtin_popcountll(n)    // Count set bits
+__builtin_ctz(n) or __builtin_ctzll(n)       // Trailing zeros (rightmost set bit position)
+__builtin_clz(n) or __builtin_clzll(n)          // Leading zeros
 __builtin_parity(n)       // Parity (1 if odd number of set bits)
+
+Time Complexity of all these functions is log2 n
 
 // ============= COMMON CHECKS =============
 n > 0 && !(n & (n-1))    // Is power of 2?
