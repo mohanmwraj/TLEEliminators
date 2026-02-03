@@ -129,9 +129,12 @@ void solve(){
         // ll contributionIfUnset = countSetBits * (1LL << bit);
         // ll netContribution = contributionIfSet - contributionIfUnset;
         contributions[bit] = {(countSetBits*(1 << bit)), bit*-1};//{netContribution, bit};
+
+        // bit * -1 to sort in descending order based on contribution when we do ascending sort
+        // We want to maximize the contribution, so we take the absolute value
     }
 
-    sort(contributions.rbegin(), contributions.rend());
+    sort(contributions.rbegin(), contributions.rend()); // To take top k contributions, so sort in descending order
     ll ans = 0;
     for(int i = 0; i < k; ++i){
         int bitToSet = abs(contributions[i].second);
