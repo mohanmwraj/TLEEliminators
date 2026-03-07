@@ -32,6 +32,10 @@
 
 $$\text{prefix}[i] = \sum_{j=0}^{i-1} a[j]$$
 
+arr = a0, a1, a2, a3, a4, a5
+
+prefix sum arr = a0, a0 + a1, a0 + a1 + a2, a0 + a1 + a2 + a3, a0 + a1 + a2 + a3 + a4
+
 **Range query:**
 
 $$\text{sum}(l, r) = \text{prefix}[r+1] - \text{prefix}[l]$$
