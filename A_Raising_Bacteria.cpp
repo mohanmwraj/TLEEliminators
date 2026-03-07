@@ -11,14 +11,31 @@ using namespace std;
 #define ff first
 #define ss second
 
-void solve(){
-    int n; cin >> n;
+/*
 
-    if(n % 2 == 0){
-        cout << 1 << endl;
-    } else {
-        cout << 2 << endl;
+   Doubling a number shifts its bits to the left by one position.
+
+    5 - 101
+    1 (put a bacteria)
+    10 (double)
+    101 (double)
+    101 (put a bacteria) = 5
+
+    no of time i put a bacteria  = no of set bits in binary representation of x
+
+    Ans = calculate the number of set bits in x
+*/
+
+void solve(){
+    int x; cin >> x;
+    int cnt_bits = 0;
+
+    for(int i = 0; i < 31; i++){
+        if(x & (1 << i)){
+            cnt_bits++;
+        }
     }
+    cout << cnt_bits << endl;
 }
 
 int main() {
