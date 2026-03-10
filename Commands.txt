@@ -1,0 +1,5 @@
+COMMAND to DELETE all .bin file in the directory
+
+find /Users/mora/Documents/TLE\ _Eliminator -name "*.bin" -type f 2>/dev/null | head -20
+
+find /Users/mora/Documents/TLE\ _Eliminator -name "*.bin" -type f -delete

@@ -110,6 +110,18 @@ For an $m \times n$ matrix, precompute:
 
 $$\text{prefix}[i][j] = \sum_{r=0}^{i-1}\sum_{c=0}^{j-1} \text{mat}[r][c]$$
 
+    prefix sum P[i][j] = sum of all elements of the from grid[x][y] such that x <= i and y <= j.
+
+    To find prefix sum of a submatrix from (l1, r1) to (l2, r2), we can use the formula:
+
+    p[l2][r2] - p[l1 - 1][r2] - p[l2][r1 - 1] + p[l1 - 1][r1 - 1] = prefix sum.
+
+    p[l1- 1][r1 - 1] = we subtract twice when we subtract left and top regions, so we need to add once.
+
+    To calculate prefix sum, we can use the following formula:
+
+    p[i][j] = grid[i][j] + p[i-1][j] + p[i][j-1] - p[i-1][j-1]
+
 ### Build (Inclusion-Exclusion)
 
 ```cpp
