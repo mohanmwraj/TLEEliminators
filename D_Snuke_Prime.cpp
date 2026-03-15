@@ -55,6 +55,9 @@ void solve(){
 // We can use a map to store the difference array, but it will be slower than using an array. 
 // We can use a vector of pairs to store the difference array, and sort
 // it by the day, and then iterate through it to calculate the prefix sum and the answer.
+
+// Time Complexity : O(n log n) for sorting, O(n) for calculating the answer, O(n log n) for total.
+// Space Complexity : O(n) for storing the difference array.
 void solve2(){
     ll n, c; cin >> n >> c;
     // vector<pair<ll, ll>> diff;
