@@ -17,13 +17,17 @@ using namespace std;
 
     To find prefix sum of a submatrix from (l1, r1) to (l2, r2), we can use the formula:
 
-    p[l2][r2] - p[l1 - 1][r2] - p[l2][r1 - 1] + p[l1 - 1][r1 - 1] = prefix sum.
+    sum = P[l2][r2] - P[l1 - 1][r2] - P[l2][r1 - 1] + P[l1 - 1][r1 - 1]
 
-    p[l1- 1][r1 - 1] = we subtract twice when we subtract left and top regions, so we need to add once.
+    Explanation of the formula:
+
+    P[L1-1][R2] = sum of elements from (0, 0) to (L1-1, R2) which is the top region that we need to subtract.
+    P[L2][R1-1] = sum of elements from (0, 0) to (L2, R1-1) which is the left region that we need to subtract.
+    P[L1-1][R1-1] = we subtract twice when we subtract left and top regions, so we need to add once.
 
     To calculate prefix sum, we can use the following formula:
 
-    p[i][j] = grid[i][j] + p[i-1][j] + p[i][j-1] - p[i-1][j-1]
+    P[i][j] = grid[i][j] + P[i-1][j] + P[i][j-1] - P[i-1][j-1]
 */
 
 /*
