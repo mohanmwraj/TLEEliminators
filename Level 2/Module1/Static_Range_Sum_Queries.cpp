@@ -22,6 +22,9 @@ void solve(){
         // which is pre[i-1] + a[i-1]
     }
 
+    // for( ll i = 0; i < n; ++i){
+    //     pre[i] = pre[i-1] + a[i];
+    // }
     while(q--){
         ll l, r; cin >> l >> r;
         cout << pre[r] - (l > 0 ? pre[l-1] : 0) << endl;
