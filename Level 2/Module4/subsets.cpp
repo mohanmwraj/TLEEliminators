@@ -56,7 +56,25 @@ void backtrack(vector<int>& nums, vector<int>& current, int index, vector<vector
 
 
 void solve(){
-    
+    int n; cin >> n;
+    vector<int> nums(n);
+    for(int i = 0; i < n; i++) {
+        cin >> nums[i]; 
+    }
+
+    vector<vector<int>> result;
+    vector<int> current;
+    backtrack(nums, current, 0, result);
+    for (const auto& subset : result) {
+        cout << "[";
+        for (size_t i = 0; i < subset.size(); i++) {
+            cout << subset[i];
+            if (i < subset.size() - 1) {
+                cout << ",";
+            }
+        }
+        cout << "]";
+    }
 }
 
 int main() {
