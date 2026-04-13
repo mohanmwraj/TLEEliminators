@@ -773,6 +773,8 @@ for (int i = 0; i < n; i++) {
 
 ## Core Idea
 A **complete binary tree** where each parent is greater (max-heap) or smaller (min-heap) than its children. Provides $O(\log n)$ insert and extract-optimal.
+Max Heap: Parent is greater than all of its children.
+Min Heap: Parent is smaller than all of its children.
 
 ```
 Max Heap:        50
@@ -782,7 +784,9 @@ Max Heap:        50
           10   20  15
 
 Array representation: [50, 30, 40, 10, 20, 15]
-Parent of i: (i-1)/2     Children of i: 2i+1, 2i+2
+Parent of i: i "(i-1)/2 "    Children of i: 2i+1(left child), 2i+2(right child)
+
+to find the index of parent , formula is (i-1)/2
 ```
 
 ## Operations & Time Complexity
