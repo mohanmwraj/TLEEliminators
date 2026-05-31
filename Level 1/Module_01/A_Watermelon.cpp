@@ -14,6 +14,11 @@ using namespace std;
 void solve(){
     int n; cin >> n;
 
+    // Each of the two pieces must have a positive integer weight.
+    // If n is less than or equal to 2, it's impossible to split the watermelon into two pieces with positive integer weights, 
+    // so we can immediately return "NO".
+
+
     if(n % 2 == 1 || n == 2){
         cout << "NO" << endl;
     } else {
