@@ -37,6 +37,7 @@ void solve(string s){
     
 }
 
+
 int main() {
     int T = 1;
     cin >> T;
@@ -45,4 +46,49 @@ int main() {
         solve(s);
     }
     return 0;
-}
+};
+
+
+class Solution {
+    private:
+         unordered_map<char, char> mapping;
+        //   = {
+        //     {')', '('},
+        //     {']', '['},
+        //     {'}', '{'}
+        // };
+    public:
+        Solution(){
+            mapping = {
+                {')', '('},
+                {']', '['},
+                {'}', '{'}
+            };
+            /*
+                mappings[')'] = '(';
+                mappings[']'] = '[';
+                mappings['}'] = '{';
+            */
+        }
+    
+        bool isValid(string s) {
+            stack<char> st;
+            for(char c : s){
+                if(mapping.find(c) != mapping.end()){
+                    char top = st.empty() ? '#' : st.top();
+                    if(top != mapping[c]){
+                        return false;
+                    }
+                    st.pop();
+                } else {
+                    st.push(c);
+                }
+            }
+            return st.empty();
+        }   
+        // Time Complexity: O(n), where n is the length of the string s. We traverse the string once, and each push and pop operation on the stack takes O(1) time.
+        // Space Complexity: O(n), in the worst case, we may need to store all
+        // the opening brackets in the stack if there are no matching closing brackets.
+
+        
+};

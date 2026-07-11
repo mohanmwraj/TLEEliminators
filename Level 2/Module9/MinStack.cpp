@@ -1,25 +1,38 @@
 //**********************************************************************************
 // pbm : https://leetcode.com/problems/min-stack/description/
 //**********************************************************************************
-#include<bits/stdc++.h>
-
-#include<iostream>
-using ll = long long;
-using ld = long double;
+#include <bits/stdc++.h>
+#include <stack>
 using namespace std;
-#define endl "\n";
-#define ff first
-#define ss second
 
-void solve(){
+class MinStack {
+public:
+    stack<int> s;
+    stack<int> pre;
     
-}
-
-int main() {
-    int T = 1;
-    cin >> T;
-    while(T--){
-        solve();
+    MinStack() {
+        
     }
-    return 0;
-}
+    void push(int val) {
+        s.push(val);
+        if(pre.empty() || val <= pre.top()){
+            pre.push(min(val, pre.empty() ? val : pre.top()));
+        }
+    }
+
+    void pop() {
+        if(s.top() == pre.top()){
+            pre.pop();
+        }
+        s.pop();
+    }
+
+    int top() {
+        return s.top();
+    }
+
+    int getMin() {
+        return pre.top();
+    }
+};
+
