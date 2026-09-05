@@ -248,11 +248,14 @@ This is useful in:
 ```cpp
 deque<int> dq;
 for (int i = 0; i < n; i++) {
+    // Maintain a decreasing deque: front = largest value in current window
     while (!dq.empty() && dq.back() < a[i]) dq.pop_back();
     dq.push_back(a[i]);
 
+    // Remove elements outside the current window [i-k+1, i]
     while (!dq.empty() && i - dq.front() + 1 > k) dq.pop_front();
 
+    // If the window is valid, the front of deque is the maximum
     if (i + 1 >= k) ans.push_back(dq.front());
 }
 ```
@@ -968,6 +971,8 @@ Time Complexity: O(n) because every element is pushed once and deleted at most o
 - Consider an index i, to find the next smaller element to the left in the range [0, i-1]
     - Approach 1: linear scan each query -> O(n^2)
     - Approach 2: a monotonic stack -> O(n)
+
+- We keep the smaller/larger element at the top because, when we move to the next index, the current element can become the answer for that query if it satisfies the required greater-or-smaller condition.
 
 ### Core sign rules
 
